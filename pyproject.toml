@@ -1,3 +1,29 @@
+[project]
+name = "parca-agent-operator"
+version = "0.1.0"
+requires-python = ">=3.10"
+
+dependencies = [
+    "ops",
+    # ---PYDEPS---
+    # lib/charms/grafana_agent/v0/cos_agent.py
+    "cosl>=0.0.51",
+    "pydantic<3",
+    # lib/charms/tempo_coordinator_k8s/v0/charm_tracing.py
+    "opentelemetry-exporter-otlp-proto-http==1.21.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "coverage[toml]",
+    "juju",
+    "pytest-operator",
+    "pytest",
+    "ruff",
+    "ops[testing]",
+    "pyright"
+]
+
 # Testing tools configuration
 [tool.coverage.run]
 branch = true
@@ -6,6 +32,7 @@ branch = true
 show_missing = true
 
 [tool.pytest.ini_options]
+asyncio_mode = "auto"
 minversion = "6.0"
 log_cli_level = "INFO"
 
